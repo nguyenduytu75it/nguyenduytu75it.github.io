@@ -2,6 +2,7 @@ $(document).ready(function () {
     initialData()
 });
 
+var arr = []
 var objData = new Object()
 
 function initialData() {
@@ -25,11 +26,29 @@ function initialData() {
             // $(".content-main").append(divContentFile + divFileName + divCategory + "</div>");
 
             objData[fileName] = object
+            arr.push(objData[fileName])
         })
     }
 
     setTimeout(function () {
-        console.log(objData['data01.csv'])
+        console.log(objData)
+        console.log(arr)
+        // for (let y = 0; y < urlData.length; y++) {
+        //     let urlSplit = urlData[i].split('/')
+        //     let fileName = urlSplit[urlSplit.length - 1]
+
+        //     divContentFile = "<div class='col-md-12 content-file' id='file-" + fileName + "'>"
+        //     divFileName = "<div class='col-md-12 file-name'><h3>" + fileName + "</h3></div>"
+        //     lstCategories = getCategories(data)
+        //     divCategory = ""
+
+        //     lstCategories.forEach(category => {
+        //         divCategory += "<div class='col-md-12 category' id = '" + category
+        //             + "' onclick='generateTable(this)'><div class='category-title' id='category-title-1'>" + category + "</div></div>"
+        //     });
+
+        //     $(".content-main").append(divContentFile + divFileName + divCategory + "</div>");
+        // }
     }, 2000)
 
 }
