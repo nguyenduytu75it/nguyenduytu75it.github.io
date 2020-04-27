@@ -3,15 +3,17 @@ body{
 }
 
 .category{
+    margin-left: 14px; 
+}
+
+.category-title:hover{
+    background-color:#1e90ff;
+}
+.category-title{
     padding: 5px;
-    margin-left: 14px;
     background-color:#5f9ea0;
     border-style: groove;
     cursor:pointer;
-}
-
-.category:hover{
-    background-color:#1e90ff;
 }
 
 .tbl-data {
