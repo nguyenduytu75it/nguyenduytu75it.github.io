@@ -50,7 +50,6 @@ function initialData() {
 
 function progressData(data) {
     var allTextLines = data.split(/\r\n|\n/);
-    let = arrCategories = []
     let objCategory = {}
     let arrHeader = []
 
