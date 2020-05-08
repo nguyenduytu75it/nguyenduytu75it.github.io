@@ -26,29 +26,23 @@ function initialData() {
             // $(".content-main").append(divContentFile + divFileName + divCategory + "</div>");
 
             objData[fileName] = object
-            arr.push(objData[fileName])
         })
     }
 
     setTimeout(function () {
-        console.log(objData)
-        console.log(arr)
-        // for (let y = 0; y < urlData.length; y++) {
-        //     let urlSplit = urlData[i].split('/')
-        //     let fileName = urlSplit[urlSplit.length - 1]
-
-        //     divContentFile = "<div class='col-md-12 content-file' id='file-" + fileName + "'>"
-        //     divFileName = "<div class='col-md-12 file-name'><h3>" + fileName + "</h3></div>"
-        //     lstCategories = getCategories(data)
-        //     divCategory = ""
-
-        //     lstCategories.forEach(category => {
-        //         divCategory += "<div class='col-md-12 category' id = '" + category
-        //             + "' onclick='generateTable(this)'><div class='category-title' id='category-title-1'>" + category + "</div></div>"
-        //     });
-
-        //     $(".content-main").append(divContentFile + divFileName + divCategory + "</div>");
-        // }
+        // console.log(objData)
+        var arrFileName = Object.keys(objData)
+        arrFileName.forEach(fileName => {
+            let arrCategories = Object.keys(objData[fileName]);
+            divContentFile = "<div class='col-md-12 content-file' id='file-" + fileName + "'>"
+            divFileName = "<div class='col-md-12 file-name'><h3>" + fileName + "</h3></div>"
+            divCategory = ""
+            arrCategories.forEach(category => {
+                divCategory += "<div class='col-md-12 category' id = '" + category
+                    + "' onclick='generateTable(this)'><div class='category-title' id='category-title-1'>" + category + "</div></div>"
+            });
+            $(".content-main").append(divContentFile + divFileName + divCategory + "</div>");
+        });
     }, 2000)
 
 }
@@ -62,7 +56,7 @@ function progressData(data) {
 
     arrHeader = allTextLines[0].split(',')
 
-    for (let i = 1; i < allTextLines.length; i++) {
+    for (let i = 0; i < allTextLines.length; i++) {
         lineSplit = allTextLines[i].split(',')
         let objLine = {}
 
@@ -79,20 +73,9 @@ function progressData(data) {
             objCategory[category] = [objLine]
         }
     }
-
+    console.log(objCategory)
     return objCategory
 
-}
-
-function getCategories(data) {
-    let = arrCategories = []
-    var allTextLines = data.split(/\r\n|\n/);
-    for (let i = 1; i <= allTextLines.length - 1; i++) {
-
-        lineSplit = allTextLines[i].split(',')
-        arrCategories.push(lineSplit[2].replace(/"/g, ""))
-    }
-    return removeDulicate(arrCategories)
 }
 
 function getData(urlData, callback) {
@@ -115,7 +98,16 @@ function removeDulicate(arrData) {
 }
 
 function generateTable(event) {
-
-    console.log($(event).attr("id"))
-    $(event).append("<div class='col-md-12 tbl-data'><h3>abc</h3></div>")
+    arrLine = objData['biz.csv']['行動規範']
+    trBody = ""
+    arrLine.forEach(objLine => {
+        tdBody = ""
+        for (const property in objLine) {
+            tdBody += "<td>"+ objLine[property] +"</td>"
+        }
+        trBody += "<tr>" + tdBody + "</tr>"
+    });
+    tbody= "<tbody>" + trBody + "</tbody>"
+    table = "<table class='table'>" + tbody + "</table>"
+    $(event).append("<div class='col-md-12 tbl-data'>"+table+"</div>")
 }
